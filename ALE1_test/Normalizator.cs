@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ALE1_test
 {
-    class Normalizator
+    public class Normalizator
     {
         private string[,] input;
 

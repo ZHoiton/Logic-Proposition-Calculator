@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ALE1_test
 {
-    class Reader
+    public class Reader
     {
         private string input;
 
@@ -16,9 +16,9 @@ namespace ALE1_test
             get { return input; }
             set { input = value; }
         }
-        private string[] processed_input;
+        private string processed_input;
 
-        public string[] ProcessedInput
+        public string ProcessedInput
         {
             get { return processed_input; }
             set { processed_input = value; }
@@ -28,16 +28,21 @@ namespace ALE1_test
             this.input = input;
             this.processed_input = processInput();
         }
-        public string[] processInput()
+        public string processInput()
         {
             string[] temp_array = Regex.Split(Input, string.Empty);
 
             //clearing the input
             string[] new_temp_array = cleanString(temp_array, 0);
+            string new_string = "";
+            foreach (string c in new_temp_array)
+            {
+                new_string += c;
+            }
 
-            return new_temp_array;
+            return new_string;
         }
-        private string[] cleanString(string[] char_array, int index)
+        public string[] cleanString(string[] char_array, int index)
         {
             if (char_array.Length - 1 == index)
             {
@@ -51,18 +56,6 @@ namespace ALE1_test
                 return cleanString(char_array, index);
             }
             return cleanString(char_array, ++index);
-        }
-        public string replacePredicates(string input,string[] predicate_values)
-        {
-            StringBuilder sb = new StringBuilder(input);
-            int[] predicate_indexes = getIndexesOfPredicates(input);
-            for (int char_index = 0; char_index < predicate_indexes.Length; char_index++)
-            {
-                sb[predicate_indexes[char_index]] = Convert.ToChar(predicate_values[char_index]);
-            }
-            input = sb.ToString();
-            //Console.WriteLine(input);
-            return input;
         }
         public string replaceUniquePredicates(string input, string[] predicate_values)
         {
@@ -165,7 +158,7 @@ namespace ALE1_test
             }
             return counter;
         }
-        private int[] getIndexesOfPredicates(string input)
+        public int[] getIndexesOfPredicates(string input)
         {
             int[] indexes = new int[getNumberOfPredicates(input)];
             int counter = 0;
@@ -179,7 +172,7 @@ namespace ALE1_test
             }
             return indexes;
         }
-        private string[] getPredicates(string input)
+        public string[] getPredicates(string input)
         {
             string[] indexes = new string[getNumberOfPredicates(input)];
             int counter = 0;
@@ -210,7 +203,7 @@ namespace ALE1_test
             }
             return counter;
         }
-        private bool checkForChar(List<char> char_list,char cc)
+        public bool checkForChar(List<char> char_list, char cc)
         {
             if (char_list.Count > 0)
             {
@@ -222,9 +215,11 @@ namespace ALE1_test
                     }
                 } return true;
             }
-            else { return true; }
+            else { 
+                return true; 
+            }
         }
-        private string[] getUniquePredicates(string input)
+        public string[] getUniquePredicates(string input)
         {
             string[] indexes = new string[getNumberOfUniquePredicates(input)];
             List<char> char_list = new List<char>();

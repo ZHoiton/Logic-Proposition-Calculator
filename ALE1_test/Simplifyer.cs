@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ALE1_test
 {
-    class Simplifyer
+    public class Simplifyer
     {
         private string[,] truthtable;
 
@@ -191,6 +191,7 @@ namespace ALE1_test
             }
             //List<string[]> new_simplifyed_table_possitive_results = simplifyed_table_possitive_results;
             List<string[]> new_simplifyed_table_possitive_results = getDistinctElements(simplifyed_table_possitive_results);
+            //List<string[]> new_simplifyed_table_possitive_results = simplifyed_table_possitive_results;
             //removing the items which are not valid
 
             new_simplifyed_table_possitive_results = removeInvalidItems(new_simplifyed_table_possitive_results, simplifyed_table_negative_results);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ALE1_test
 {
-    class Predicate
+    public class Predicate
     {
         private const char not_sign = '~';
         private const char bracket = '(';

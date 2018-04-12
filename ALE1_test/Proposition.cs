@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ALE1_test
 {
-    class Proposition
+    public class Proposition
     {
         private const char not_sign = '~';
         private const char and_sign = '&';

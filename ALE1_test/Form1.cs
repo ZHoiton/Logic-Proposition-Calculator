@@ -26,13 +26,9 @@ namespace ALE1_test
         {
             Reader reader = new Reader(text_box_input.Text);
             //cleaning the input
-            string[] clean_input = reader.ProcessedInput;
-            string cleaned_string = "";
+            string cleaned_string = reader.ProcessedInput;
             string binnary = "";
-            foreach (string item in clean_input)
-            {
-                cleaned_string += item;
-            }
+
             //generating the truth table
             string[,] table = reader.generateTruthTableWithUniqueChars();
             //creating the array list for the simplifing 
