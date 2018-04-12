@@ -19,92 +19,6 @@ namespace ALE1_test
         {
 
         }
-        public string[,] simplifyProposition(string[,] internal_truth_table)
-        {
-            List<string> encountered_combinations = new List<string>();
-            List<string[]> new_truth_table = new List<string[]>();
-            for (int row_counter = 1; row_counter < internal_truth_table.GetLength(0); row_counter++)
-            {
-                if (internal_truth_table[row_counter, internal_truth_table.GetLength(1) - 1].Equals("1"))
-                {
-                    string[] current_element = new string[internal_truth_table.GetLength(1) - 1];
-                    //string string_to_be_added_to_the_combinations = "";
-                    //creating the new element
-                    for (int current_element_predicate_value = 0; current_element_predicate_value < internal_truth_table.GetLength(1)-1; current_element_predicate_value++)
-                    {
-                        current_element[current_element_predicate_value] = internal_truth_table[row_counter, current_element_predicate_value];
-                        //string_to_be_added_to_the_combinations+=internal_truth_table[row_counter, current_element_predicate_value];
-                    }
-                    //encountered_combinations.Add(string_to_be_added_to_the_combinations);
-                    //doing stuff with the element
-                    for (int row_counter_for_each_eleemnt = 1; row_counter_for_each_eleemnt < internal_truth_table.GetLength(0); row_counter_for_each_eleemnt++)
-                    {
-                        //checking at what palce the predicates are the same
-                        int[] counter_for_matching_predicates = new int[internal_truth_table.GetLength(1) - 1];
-                        string[] new_element_row = new string[internal_truth_table.GetLength(1) - 1];
-                        for (int column_counter_for_each_element = 0; column_counter_for_each_element < internal_truth_table.GetLength(1) - 1; column_counter_for_each_element++)
-                        {
-                            if (current_element[column_counter_for_each_element].Equals(internal_truth_table[row_counter_for_each_eleemnt, column_counter_for_each_element]))
-                            {
-                                counter_for_matching_predicates[column_counter_for_each_element]++;
-                            }
-                        }
-
-
-                        if (!checkifTheLogicNotationIsTheSame(counter_for_matching_predicates))
-                        {
-                            //checking if more that the half of it are the same
-                            int count_count_for_matching_predicates = 0;
-                            foreach (int item in counter_for_matching_predicates)
-                            {
-                                if (item == 1)
-                                {
-                                    count_count_for_matching_predicates++;
-                                }
-                            }
-                            if (count_count_for_matching_predicates >= ((internal_truth_table.GetLength(1) - 1) / 2))
-                            {
-                                string[] new_string = new string[internal_truth_table.GetLength(1) - 1];
-                                for (int new_predicate = 0; new_predicate < internal_truth_table.GetLength(1) - 1; new_predicate++)
-                                {
-                                    if (counter_for_matching_predicates[new_predicate] == 1)
-                                    {
-                                        new_string[new_predicate] = current_element[new_predicate];
-
-                                    }
-                                    else
-                                    {
-                                        new_string[new_predicate] = "*";
-                                    }
-                                }
-                                string add_to_encountered = "";
-                                for (int i = 0; i < internal_truth_table.GetLength(1) - 1; i++)
-                                {
-                                    add_to_encountered += new_string[i];
-                                }
-                                if (!checkIfValuePresent(encountered_combinations, add_to_encountered))
-                                {
-                                    new_truth_table.Add(new_string);
-                                    foreach (string item in new_string)
-                                    {
-
-                                        Console.Write(item);
-                                    }
-                                    Console.WriteLine("");
-                                    encountered_combinations.Add(add_to_encountered);
-                                    break;
-                                }
-                            }
-                        }
-                        
-                    }
-
-                }
-            }
-            
-            return null;
-        }
-
         public string[,] getSimplifyedTruthTable(string[,] passed_truth_table)
         {
             List<string[]> simplifyed_table = new List<string[]>();
@@ -140,7 +54,7 @@ namespace ALE1_test
                             //checking if the 2 elements are diffrent
                             if (!checkIfElementsAreTheSame(current_element, second_element))
                             {
-                                if (checkIfMoreThanTwoAreTheSameTest(current_element, second_element))
+                                if (checkIsPossibleToSimplify(current_element, second_element))
                                 {
                                     //creating the new element which will be passed in the new list
                                     string[] new_element_for_simplifyed_table = new string[passed_truth_table.GetLength(1)];
@@ -226,7 +140,7 @@ namespace ALE1_test
             }
             return simplifyed_table_arry;
         }
-        private bool checkIfPropositionsAreValid(string[,] array)
+        public bool checkIfPropositionsAreValid(string[,] array)
         {
             //if (hasSimplifyedMoreThanTwoTimes(array))
             //{
@@ -273,7 +187,7 @@ namespace ALE1_test
             //}
         }
         
-        private List<string[]> removeInvalidItems(List<string[]> simplified_list,List<string[]> non_simplified_list)
+        public List<string[]> removeInvalidItems(List<string[]> simplified_list,List<string[]> non_simplified_list)
         {
             if (simplified_list.Count > 0)
             {
@@ -302,7 +216,7 @@ namespace ALE1_test
             }
             return simplified_list;
         }
-        private bool continueToSimplify(string[] string_array)
+        public bool continueToSimplify(string[] string_array)
         {
             int already_simplified_predicates = 0;
             for (int counter = 0; counter < string_array.Length-1; counter++)
@@ -318,64 +232,7 @@ namespace ALE1_test
             }
             return false;
         }
-        private void cwElement(string[] element,string message)
-        {
-            Console.Write(message+" ");
-            foreach (string item in element)
-            {
-                Console.Write(item+" ");
-            }
-            Console.WriteLine("");
-        }
-        private bool checkIfMoreThanTwoAreTheSame(string[] first_element, string[] second_element)
-        {
-            int return_int = 0;
-            int already_simplified_predicates = 0;
-            for (int counter = 0; counter < first_element.Length; counter++)
-            {
-                if (first_element[counter].Equals(second_element[counter]))
-                {
-                    return_int++;
-                    
-                }
-                else if (first_element[counter].Equals("*") || second_element[counter].Equals("*"))
-                {
-                    already_simplified_predicates++;
-                }
-            }
-            if ((double)already_simplified_predicates > (double)first_element.Length / 2)
-            {
-                if ((double)return_int < (double)first_element.Length / 2&& return_int!=0)
-                {
-                    //Console.WriteLine("--more than the half of the elements are the same");
-                    return true;
-                } return false;
-            }
-            else
-            {
-                //if the proposition is made up from 2 predicates it needs the equal sign so it can iterate
-                if (first_element.Length < 3)
-                {
-
-                    if ((double)return_int >= (double)first_element.Length / 2)
-                    {
-                        //Console.WriteLine("--more than the half of the elements are the same");
-                        return true;
-                    }
-                    return false;
-                }
-                else
-                {
-                    if ((double)return_int > (double)first_element.Length / 2)
-                    {
-                        //Console.WriteLine("--more than the half of the elements are the same");
-                        return true;
-                    }
-                    return false;
-                }
-            }
-        }
-        private bool checkIfMoreThanTwoAreTheSameTest(string[] first_element, string[] second_element)
+        public bool checkIsPossibleToSimplify(string[] first_element, string[] second_element)
         {
             int same_elements_counter = 0;
             for (int counter = 0; counter < first_element.Length; counter++)
@@ -391,7 +248,7 @@ namespace ALE1_test
             }
             return false;
         }
-        private List<string[]> getDistinctElements(List<string[]> list)
+        public List<string[]> getDistinctElements(List<string[]> list)
         {
             List<string[]> temp_list = new List<string[]>();
             bool add_first_time = false;
@@ -421,7 +278,7 @@ namespace ALE1_test
             }
             return temp_list;
         }
-        private bool checkIfElementsAreTheSame(string[] first_element, string[] second_element)
+        public bool checkIfElementsAreTheSame(string[] first_element, string[] second_element)
         {
             if (first_element.Length == second_element.Length)
             {
@@ -442,44 +299,6 @@ namespace ALE1_test
             }
             //Console.WriteLine("elements not the same length");
             return false;
-        }
-        private bool checkIfValuePresent(List<string> list_with_combinations, string element)
-        {
-            if (list_with_combinations.Count > 0)
-            {
-                foreach (String element_from_list in list_with_combinations)
-                {
-                    if (element_from_list.Equals(element))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            return false;
-        }
-        private bool checkifTheLogicNotationIsTheSame(int[] int_list)
-        {
-            int counter = 0;
-            foreach (int item in int_list)
-            {
-                if (item == 1)
-                {
-                    counter++;
-                }
-            }
-            if (counter == int_list.Length)
-            {
-                return true;
-            } return false;
-        }
-        private string getStringFromArray(string[] string_array){
-            string return_element = "";
-            foreach (string element in string_array)
-            {
-                return_element += element;
-            }
-            return return_element;
         }
     }
 }
