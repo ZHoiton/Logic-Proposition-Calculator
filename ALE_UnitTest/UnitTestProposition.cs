@@ -15,6 +15,20 @@ namespace ALE_UnitTest
             Assert.AreEqual(expected_proposition, proposition.getPropositionASCIIFormat());
         }
         [TestMethod]
+        public void doesItConsumePropsCorrectlyWithNOTTest()
+        {
+            Proposition proposition = new Proposition("|(~(>(a,b)),c)");
+            string expected_proposition = "|(~(>(a,b)),c)";
+            Assert.AreEqual(expected_proposition, proposition.getPropositionASCIIFormat());
+        }
+        [TestMethod]
+        public void doesItConsumePropsCorrectlyWithNOTSecondTest()
+        {
+            Proposition proposition = new Proposition("~(|(~(>(a,b)),=(c,f)))");
+            string expected_proposition = "~(|(~(>(a,b)),=(c,f)))";
+            Assert.AreEqual(expected_proposition, proposition.getPropositionASCIIFormat());
+        }
+        [TestMethod]
         public void doesItCalculatePropsCorrectlyTest()
         {
             Proposition proposition = new Proposition("|(=(>(1,1),>(1,1)),=(>(1,1),>(1,1)))");

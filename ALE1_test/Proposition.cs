@@ -18,6 +18,8 @@ namespace ALE1_test
         private const char inverce_bracket = ')';
         private const char comma = ',';
         private int proposition_palce = 0;
+        private bool first_negative = false;
+        private bool second_negative = false;
 
         private List<Predicate> predicatess;
 
@@ -33,6 +35,21 @@ namespace ALE1_test
             get { return childs; }
             set { childs = value; }
         }
+        private bool negative_value;
+
+        public bool negative_proposition
+        {
+            get { return negative_value; }
+            set { negative_value = value; }
+        }
+        private bool negative_;
+
+        public bool negative__
+        {
+            get { return negative_; }
+            set { negative_ = value; }
+        }
+        
         
         private string inputstring;
         
@@ -66,16 +83,32 @@ namespace ALE1_test
         public Proposition(string input_string)
         {
             this.input_string = input_string;
+            if (input_string[0].Equals(not_sign))
+            {
+                input_string = parseNegativeProposition(input_string);
+                this.negative__ = true;
+            }
             input_string = signHandler(input_string);
             input_string = bracketHandler(input_string);
             child_propositions = new List<Proposition>();
             predicates = new List<Predicate>();
+
             string first_proposition_string = parseInputString(input_string);
-            if (input_string[0].Equals(and_sign) || input_string[0].Equals(equation_sign) || input_string[0].Equals(implication_sign)
-                || input_string[0].Equals(or_sign))
+            if (first_proposition_string[0].Equals(not_sign) && first_proposition_string.Contains(','))
+            {
+                first_proposition_string = parseNegativeProposition(first_proposition_string);
+                first_negative = true;
+            }
+            if (first_proposition_string[0].Equals(and_sign) || first_proposition_string[0].Equals(equation_sign) || first_proposition_string[0].Equals(implication_sign)
+                || first_proposition_string[0].Equals(or_sign))
             {
                 proposition_palce = 0;
-                this.child_propositions.Add(new Proposition(first_proposition_string));
+                Proposition new_prop = new Proposition(first_proposition_string);
+                if (first_negative)
+                {
+                    new_prop.negative__ = true;
+                }
+                this.child_propositions.Add(new_prop);
             }
             else
             {
@@ -83,12 +116,24 @@ namespace ALE1_test
             }
             input_string = removeStringFromInputString(input_string, first_proposition_string);
             string second_proposition_string = parseInputString(input_string);
-            if (input_string[0].Equals(and_sign) || input_string[0].Equals(equation_sign) || input_string[0].Equals(implication_sign)
-                || input_string[0].Equals(or_sign))
+
+            if (second_proposition_string[0].Equals(not_sign) && second_proposition_string.Contains(','))
+            {
+                second_proposition_string = parseNegativeProposition(second_proposition_string);
+                second_negative = true;
+            }
+            if (second_proposition_string[0].Equals(and_sign) || second_proposition_string[0].Equals(equation_sign) || second_proposition_string[0].Equals(implication_sign)
+                || second_proposition_string[0].Equals(or_sign))
             {
                 proposition_palce = 1;
-                this.child_propositions.Add(new Proposition(second_proposition_string));
+                Proposition new_prop = new Proposition(second_proposition_string);
+                if (second_negative)
+                {
+                    new_prop.negative__ = true;
+                }
+                this.child_propositions.Add(new_prop);
             }
+
             else
             {
                 predicates.Add(new Predicate(second_proposition_string));
@@ -134,6 +179,10 @@ namespace ALE1_test
                     {
                         return true;
                     }
+                    else if (input_string[0].Equals(not_sign) && (input_string[2].Equals(and_sign) || input_string[2].Equals(or_sign) || input_string[2].Equals(equation_sign) || input_string[2].Equals(implication_sign)))
+                    {
+                        return true;
+                    }
                 
                 }
             } return false;
@@ -173,8 +222,19 @@ namespace ALE1_test
                 }
             return input_string;
         }
+        public string parseNegativeProposition(string input_string)
+        {
+            negative_proposition = true;
+            string temp_string = input_string.Substring(2, input_string.Length-3);
+            Console.WriteLine(temp_string);
+            return temp_string;
+        }
         public string removeStringFromInputString(string input_string ,string input_string_to_remove)
         {
+            if (negative_proposition)
+            {
+                input_string_to_remove = "~(" + input_string_to_remove + ")";
+            }
             if (input_string.Length > input_string_to_remove.Length)
             {
                 int index = input_string.IndexOf(input_string_to_remove);
@@ -236,6 +296,10 @@ namespace ALE1_test
             else
             {
                 output_string += proposition_sign + "(" + predicates[0].getPredicateASCIIFormat() + "," + predicates[1].getPredicateASCIIFormat() + ")";
+            }
+            if (negative__)
+            {
+                output_string = "~(" + output_string + ")";
             }
             return output_string;
         }
@@ -503,12 +567,28 @@ namespace ALE1_test
                     case and_sign:
                         if (predicates[0].getValue() && predicates[1].getValue())
                         {
+                            if (negative__)
+                            {
+                                return false;
+                            }
+                            return true;
+                        }
+                        if (negative__)
+                        {
                             return true;
                         }
                         return false;
 
                     case or_sign:
                         if (!predicates[0].getValue() && !predicates[1].getValue())
+                        {
+                            if (negative__)
+                            {
+                                return true;
+                            }
+                            return false;
+                        }
+                        if (negative__)
                         {
                             return false;
                         }
@@ -517,6 +597,14 @@ namespace ALE1_test
                     case implication_sign:
                         if (!predicates[0].getValue() || predicates[1].getValue())
                         {
+                            if (negative__)
+                            {
+                                return false;
+                            }
+                            return true;
+                        }
+                        if (negative__)
+                        {
                             return true;
                         }
                         return false;
@@ -524,6 +612,14 @@ namespace ALE1_test
                     case equation_sign:
                         if (predicates[0].getValue() && predicates[1].getValue() ||
                             !predicates[0].getValue() && !predicates[1].getValue())
+                        {
+                            if (negative__)
+                            {
+                                return false;
+                            }
+                            return true;
+                        }
+                        if (negative__)
                         {
                             return true;
                         }
