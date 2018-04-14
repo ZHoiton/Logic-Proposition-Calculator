@@ -23,6 +23,20 @@ namespace ALE_UnitTest
             Assert.AreEqual(expected_string, result_string);
         }
         [TestMethod]
+        public void readerConstructorSecondTest()
+        {
+            Reader reader = new Reader(test_string+test_string);
+            string result_string = reader.ProcessedInput;
+            Assert.AreEqual(expected_string+expected_string, result_string);
+        }
+        [TestMethod]
+        public void readerConstructorExtraTest()
+        {
+            Reader reader = new Reader("~(=(>(=(>(a,B)   ,|(  |(>(A,b),  ~(B))   ,a )),a),>(=(>(a,B)   ,|(  ~(b   ),a )),a)))");
+            string result_string = reader.ProcessedInput;
+            Assert.AreEqual("~(=(>(=(>(a,B),|(|(>(A,b),~(B)),a)),a),>(=(>(a,B),|(~(b),a)),a)))", result_string);
+        }
+        [TestMethod]
         public void cleanStringTest()
         {
             Reader reader = new Reader(test_string);
@@ -79,6 +93,22 @@ namespace ALE_UnitTest
             list_of_chars.Add('B');
             list_of_chars.Add('b');
             bool is_char_present = false;
+            bool result = reader.checkForChar(list_of_chars, 'a');
+            Assert.AreEqual(is_char_present, result);
+        }
+        [TestMethod]
+        public void checkForCharSecondTest()
+        {
+            Reader reader = new Reader(test_string);
+            List<char> list_of_chars = new List<char>();
+            list_of_chars.Add('M');
+            list_of_chars.Add('B');
+            list_of_chars.Add('b');
+            list_of_chars.Add('q');
+            list_of_chars.Add('Q');
+            list_of_chars.Add('E');
+            list_of_chars.Add('e');
+            bool is_char_present = true;
             bool result = reader.checkForChar(list_of_chars, 'a');
             Assert.AreEqual(is_char_present, result);
         }
