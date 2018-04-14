@@ -45,6 +45,7 @@
             this.text_box_output_nand = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.data_grid_truth_table_dnf = new System.Windows.Forms.DataGridView();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.data_grid_view_truth_table)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.data_grid_view_simplified_truth_table)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.data_grid_truth_table_dnf)).BeginInit();
@@ -193,11 +194,23 @@
             this.data_grid_truth_table_dnf.Size = new System.Drawing.Size(1132, 168);
             this.data_grid_truth_table_dnf.TabIndex = 19;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(1061, 152);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(87, 17);
+            this.checkBox1.TabIndex = 21;
+            this.checkBox1.Text = "Sort columns";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1160, 759);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.data_grid_truth_table_dnf);
             this.Controls.Add(this.label7);
@@ -244,6 +257,7 @@
         private System.Windows.Forms.TextBox text_box_output_nand;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridView data_grid_truth_table_dnf;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

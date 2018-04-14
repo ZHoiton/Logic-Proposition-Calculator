@@ -119,9 +119,12 @@ namespace ALE1_test
         }
         private void generateFormDNFTable(string[,] simplifyed_table)
         {
+            this.data_grid_truth_table_dnf.DataSource = null;
             DataTable data_table = new DataTable();
+            string[] column_names = new string[simplifyed_table.GetLength(1)];
             for (int column = 0; column < simplifyed_table.GetLength(1); column++)
             {
+                column_names[column] = simplifyed_table[0, column];
                 data_table.Columns.Add(simplifyed_table[0, column]);
             }
             for (int row = 1; row < simplifyed_table.GetLength(0); row++)
@@ -134,15 +137,23 @@ namespace ALE1_test
                 {
                     data_table.Rows[row - 1][columns] = simplifyed_table[row, columns];
                 }
+            }
+            Array.Sort(column_names, 0, column_names.Length - 1);
+            if (checkBox1.Checked)
+            {
+                data_table.SetColumnsOrder(column_names);
             }
             data_grid_truth_table_dnf.DataSource = data_table;
             formatTable(data_grid_truth_table_dnf, simplifyed_table.GetLength(1), simplifyed_table[0, simplifyed_table.GetLength(1) - 1]);
         }
         private void generateFormSimplifiedTable(string[,] simplifyed_table)
         {
+            this.data_grid_view_simplified_truth_table.DataSource = null;
             DataTable data_table = new DataTable();
+            string[] column_names = new string[simplifyed_table.GetLength(1)];
             for (int column = 0; column < simplifyed_table.GetLength(1); column++)
             {
+                column_names[column] = simplifyed_table[0, column];
                 data_table.Columns.Add(simplifyed_table[0, column]);
             }
             for (int row = 1; row < simplifyed_table.GetLength(0); row++)
@@ -155,6 +166,11 @@ namespace ALE1_test
                 {
                     data_table.Rows[row - 1][columns] = simplifyed_table[row, columns];
                 }
+            }
+            Array.Sort(column_names, 0, column_names.Length - 1);
+            if (checkBox1.Checked)
+            {
+                data_table.SetColumnsOrder(column_names);
             }
             data_grid_view_simplified_truth_table.DataSource = data_table;
             formatTable(data_grid_view_simplified_truth_table, simplifyed_table.GetLength(1), simplifyed_table[0, simplifyed_table.GetLength(1) - 1]);
@@ -162,9 +178,12 @@ namespace ALE1_test
 
         private void generateTableInForm(string[,] new_table_for_simplification)
         {
+            this.data_grid_view_truth_table.DataSource = null;
             DataTable data_table = new DataTable();
+            string[] column_names = new string[new_table_for_simplification.GetLength(1)];
             for (int column = 0; column < new_table_for_simplification.GetLength(1); column++)
             {
+                column_names[column] = new_table_for_simplification[0, column];
                 data_table.Columns.Add(new_table_for_simplification[0, column]);
             }
             for (int row = 1; row < new_table_for_simplification.GetLength(0); row++)
@@ -177,6 +196,11 @@ namespace ALE1_test
                 {
                     data_table.Rows[row-1][columns] = new_table_for_simplification[row, columns];
                 }
+            }
+            Array.Sort(column_names,0,column_names.Length-1);
+            if (checkBox1.Checked)
+            {
+                data_table.SetColumnsOrder(column_names);
             }
             data_grid_view_truth_table.DataSource = data_table;
             formatTable(data_grid_view_truth_table, new_table_for_simplification.GetLength(1),new_table_for_simplification[0,new_table_for_simplification.GetLength(1)-1]);
@@ -197,6 +221,14 @@ namespace ALE1_test
                 last_column_width = 100;
             }
             data_grid.Columns[iterator - 1].Width = last_column_width;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!text_box_input.Text.Equals(""))
+            {
+                button1_Click(sender,e);
+            }
         }
     }
 }
