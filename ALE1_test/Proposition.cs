@@ -431,6 +431,10 @@ namespace ALE1_test
                         break;
                 }
             }
+            if (negative__)
+            {
+                output_string = "%(" + output_string + "," + output_string + ")";
+            }
             return output_string;
         }
         public bool calculate()
