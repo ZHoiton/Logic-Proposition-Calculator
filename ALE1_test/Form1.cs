@@ -61,9 +61,15 @@ namespace ALE1_test
 
 
             generateTableInForm(new_table_for_simplification);
-
-            string strHex = Convert.ToInt32(binnary, 2).ToString("X");
-            text_box_output_hex.Text = strHex;
+            try
+            {
+                string strHex = Convert.ToInt32(binnary, 2).ToString("X");
+                text_box_output_hex.Text = strHex;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("string too big to convert it to hex");
+            }
 
             Console.WriteLine("staring simplifing");
             Simplifyer simm = new Simplifyer();
@@ -88,7 +94,7 @@ namespace ALE1_test
 
 
             cleaned_string = norm_prop;
-            binnary = "";
+
             table = reader.generateTruthTableWithUniqueChars();
             new_table_for_simplification = new string[table.GetLength(0), table.GetLength(1) + 1];
             Console.WriteLine("starting truth table from dnf");
@@ -111,7 +117,6 @@ namespace ALE1_test
                 {
                     string new_proposition = reader.replaceUniquePredicates(cleaned_string, asd);
                     string value = Convert.ToInt16(new Proposition(new_proposition).calculate()).ToString();
-                    binnary = value + binnary;
                     new_table_for_simplification[row, table.GetLength(1)] = value;
                 }
             }
@@ -225,7 +230,7 @@ namespace ALE1_test
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (!text_box_input.Text.Equals(""))
+            if (!text_box_input.Text.Equals("") && this.data_grid_view_truth_table.DataSource != null)
             {
                 button1_Click(sender,e);
             }
