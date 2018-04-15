@@ -103,6 +103,10 @@ namespace ALE1_test
         }
         public String getPredicateNegativeNANDFormat()
         {
+            if (is_negative)
+            {
+                return input_value;
+            }
             return "%(" + getPredicateNANDFormat() + "," + getPredicateNANDFormat() + ")";
         }
         private bool value()

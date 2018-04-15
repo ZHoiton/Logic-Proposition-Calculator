@@ -341,16 +341,28 @@ namespace ALE1_test
                     {
                         switch (Convert.ToChar(proposition_sign))
                         {
+                            //case or_sign:
+                            //    output_string += "%(" + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNegativeNANDFormat() + ")";
+                            //    break;
+                            //case equation_sign:
+                            //    output_string += "%(%(%(%(" + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNegativeNANDFormat() + "),%("
+                            //        + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNegativeNANDFormat() + ")),%(%(" + child_propositions[0].getPropositionNANDFormat()
+                            //        + "," + predicates[0].getPredicateNANDFormat() + "),%(" + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNANDFormat() + "))),%(%(%("
+                            //        + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNegativeNANDFormat() + "),%(" + child_propositions[0].getPropositionNANDFormat()
+                            //        + "," + predicates[0].getPredicateNegativeNANDFormat() + ")),%(%(" + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNANDFormat() + "),%("
+                            //        + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNANDFormat() + "))))";
+                            //    break;
+                            //case implication_sign:
+                            //    output_string += "%(" + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNegativeNANDFormat() + ")";
+                            //    break;
+                            //default:
+                            //    output_string += "%(%(" + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNANDFormat() + "),%(" + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNANDFormat() + "))";
+                            //    break;
                             case or_sign:
-                                output_string += "%(" + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNegativeNANDFormat() + ")";
+                                output_string += "%(" + "%(" + child_propositions[0].getPropositionNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + ")" + "," + predicates[0].getPredicateNegativeNANDFormat() + ")";
                                 break;
                             case equation_sign:
-                                output_string += "%(%(%(%(" + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNegativeNANDFormat() + "),%("
-                                    + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNegativeNANDFormat() + ")),%(%(" + child_propositions[0].getPropositionNANDFormat()
-                                    + "," + predicates[0].getPredicateNANDFormat() + "),%(" + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNANDFormat() + "))),%(%(%("
-                                    + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNegativeNANDFormat() + "),%(" + child_propositions[0].getPropositionNANDFormat()
-                                    + "," + predicates[0].getPredicateNegativeNANDFormat() + ")),%(%(" + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNANDFormat() + "),%("
-                                    + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNANDFormat() + "))))";
+                                output_string += "%(%(" + "%(" + child_propositions[0].getPropositionNANDFormat() +","+ child_propositions[0].getPropositionNANDFormat() + ")" + "," + predicates[0].getPredicateNegativeNANDFormat() + "),%(" + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNANDFormat() + "))" ;
                                 break;
                             case implication_sign:
                                 output_string += "%(" + child_propositions[0].getPropositionNANDFormat() + "," + predicates[0].getPredicateNegativeNANDFormat() + ")";
@@ -364,19 +376,31 @@ namespace ALE1_test
                     {
                         switch (Convert.ToChar(proposition_sign))
                         {
+                            //case or_sign:
+                            //    output_string += "%(" + predicates[0].getPredicateNegativeNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + ")";
+                            //    break;
+                            //case equation_sign:
+                            //    output_string += "%(%(%(%(" + predicates[0].getPredicateNegativeNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + "),%("
+                            //        + predicates[0].getPredicateNegativeNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + ")),%(%(" + predicates[0].getPredicateNANDFormat()
+                            //        + "," + child_propositions[0].getPropositionNANDFormat() + "),%(" + predicates[0].getPredicateNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + "))),%(%(%("
+                            //        + predicates[0].getPredicateNegativeNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + "),%(" + predicates[0].getPredicateNegativeNANDFormat()
+                            //        + "," + child_propositions[0].getPropositionNANDFormat() + ")),%(%(" + predicates[0].getPredicateNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + "),%("
+                            //        + predicates[0].getPredicateNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + "))))";
+                            //    break;
+                            //case implication_sign:
+                            //    output_string += "%(" + predicates[0].getPredicateNegativeNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + ")";
+                            //    break;
+                            //default:
+                            //    output_string += "%(%(" + predicates[0].getPredicateNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + "),%(" + predicates[0].getPredicateNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + "))";
+                            //    break;
                             case or_sign:
-                                output_string += "%(" + predicates[0].getPredicateNegativeNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + ")";
+                                output_string += "%(" + predicates[0].getPredicateNegativeNANDFormat() + "," + "%(" + child_propositions[0].getPropositionNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + ")" + ")";
                                 break;
                             case equation_sign:
-                                output_string += "%(%(%(%(" + predicates[0].getPredicateNegativeNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + "),%("
-                                    + predicates[0].getPredicateNegativeNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + ")),%(%(" + predicates[0].getPredicateNANDFormat()
-                                    + "," + child_propositions[0].getPropositionNANDFormat() + "),%(" + predicates[0].getPredicateNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + "))),%(%(%("
-                                    + predicates[0].getPredicateNegativeNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + "),%(" + predicates[0].getPredicateNegativeNANDFormat()
-                                    + "," + child_propositions[0].getPropositionNANDFormat() + ")),%(%(" + predicates[0].getPredicateNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + "),%("
-                                    + predicates[0].getPredicateNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + "))))";
+                                output_string += "%(%(" + predicates[0].getPredicateNegativeNANDFormat() + "," + "%(" + child_propositions[0].getPropositionNANDFormat()+","+ child_propositions[0].getPropositionNANDFormat() + ")" + "),%(" + predicates[0].getPredicateNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + "))";
                                 break;
                             case implication_sign:
-                                output_string += "%(" + predicates[0].getPredicateNegativeNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + ")";
+                                output_string += "%(" + predicates[0].getPredicateNANDFormat() + "," + "%(" + child_propositions[0].getPropositionNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + ")" + ")";
                                 break;
                             default:
                                 output_string += "%(%(" + predicates[0].getPredicateNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + "),%(" + predicates[0].getPredicateNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + "))";
@@ -389,18 +413,13 @@ namespace ALE1_test
                     switch (Convert.ToChar(proposition_sign))
                     {
                         case or_sign:
-                            output_string += "%(" + child_propositions[0].getPropositionNANDFormat() + "," + child_propositions[1].getPropositionNANDFormat() + ")";
+                            output_string += "%(" + "%(" + child_propositions[0].getPropositionNANDFormat() + "," + child_propositions[0].getPropositionNANDFormat() + ")" + "," + "%(" + child_propositions[1].getPropositionNANDFormat() + "," + child_propositions[1].getPropositionNANDFormat() + ")" + ")";
                             break;
                         case equation_sign:
-                            output_string += "%(%(%(%(" + child_propositions[0].getPropositionNANDFormat() + "," + child_propositions[1].getPropositionNANDFormat() + "),%("
-                                + child_propositions[0].getPropositionNANDFormat() + "," + child_propositions[1].getPropositionNANDFormat() + ")),%(%(" + child_propositions[0].getPropositionNANDFormat()
-                                + "," + child_propositions[1].getPropositionNANDFormat() + "),%(" + child_propositions[0].getPropositionNANDFormat() + "," + child_propositions[1].getPropositionNANDFormat() + "))),%(%(%("
-                                + child_propositions[0].getPropositionNANDFormat() + "," + child_propositions[1].getPropositionNANDFormat() + "),%(" + child_propositions[0].getPropositionNANDFormat()
-                                + "," + child_propositions[1].getPropositionNANDFormat() + ")),%(%(" + child_propositions[0].getPropositionNANDFormat() + "," + child_propositions[1].getPropositionNANDFormat() + "),%("
-                                + child_propositions[0].getPropositionNANDFormat() + "," + child_propositions[1].getPropositionNANDFormat() + "))))";
+                            output_string += "%(%(" + "%("+child_propositions[0].getPropositionNANDFormat()+","+child_propositions[0].getPropositionNANDFormat()+")" + "," + "%("+child_propositions[1].getPropositionNANDFormat()+","+child_propositions[1].getPropositionNANDFormat()+")" + "),%(" + child_propositions[0].getPropositionNANDFormat() + "," + child_propositions[1].getPropositionNANDFormat() + "))";
                             break;
                         case implication_sign:
-                            output_string += "%(" + child_propositions[0].getPropositionNANDFormat() + "," + child_propositions[1].getPropositionNANDFormat() + ")";
+                            output_string += "%(" + child_propositions[0].getPropositionNANDFormat() + "," + "%(" + child_propositions[1].getPropositionNANDFormat() + child_propositions[1].getPropositionNANDFormat() + ")" + ")";
                             break;
                         default:
                             output_string += "%(%(" + child_propositions[0].getPropositionNANDFormat() + "," + child_propositions[1].getPropositionNANDFormat() + "),%(" + child_propositions[0].getPropositionNANDFormat() + "," + child_propositions[1].getPropositionNANDFormat() + "))";
@@ -416,15 +435,16 @@ namespace ALE1_test
                         output_string += "%(" + predicates[0].getPredicateNegativeNANDFormat() + "," + predicates[1].getPredicateNegativeNANDFormat() + ")";
                         break;
                     case equation_sign:
-                        output_string += "%(%(%(%(" + predicates[0].getPredicateNegativeNANDFormat() + "," + predicates[1].getPredicateNegativeNANDFormat() + "),%(" 
-                            + predicates[0].getPredicateNegativeNANDFormat() + "," + predicates[1].getPredicateNegativeNANDFormat() + ")),%(%(" + predicates[0].getPredicateNANDFormat() 
-                            + "," + predicates[1].getPredicateNANDFormat() + "),%(" + predicates[0].getPredicateNANDFormat() + "," + predicates[1].getPredicateNANDFormat() + "))),%(%(%(" 
-                            + predicates[0].getPredicateNegativeNANDFormat() + "," + predicates[1].getPredicateNegativeNANDFormat() + "),%(" + predicates[0].getPredicateNegativeNANDFormat() 
-                            + "," + predicates[1].getPredicateNegativeNANDFormat() + ")),%(%(" + predicates[0].getPredicateNANDFormat() + "," + predicates[1].getPredicateNANDFormat() + "),%(" 
-                            + predicates[0].getPredicateNANDFormat() + "," + predicates[1].getPredicateNANDFormat() + "))))";
+                        //output_string += "%(%(%(%(" + predicates[0].getPredicateNegativeNANDFormat() + "," + predicates[1].getPredicateNegativeNANDFormat() + "),%(" 
+                        //    + predicates[0].getPredicateNegativeNANDFormat() + "," + predicates[1].getPredicateNegativeNANDFormat() + ")),%(%(" + predicates[0].getPredicateNANDFormat() 
+                        //    + "," + predicates[1].getPredicateNANDFormat() + "),%(" + predicates[0].getPredicateNANDFormat() + "," + predicates[1].getPredicateNANDFormat() + "))),%(%(%(" 
+                        //    + predicates[0].getPredicateNegativeNANDFormat() + "," + predicates[1].getPredicateNegativeNANDFormat() + "),%(" + predicates[0].getPredicateNegativeNANDFormat() 
+                        //    + "," + predicates[1].getPredicateNegativeNANDFormat() + ")),%(%(" + predicates[0].getPredicateNANDFormat() + "," + predicates[1].getPredicateNANDFormat() + "),%(" 
+                        //    + predicates[0].getPredicateNANDFormat() + "," + predicates[1].getPredicateNANDFormat() + "))))";
+                        output_string += "%(%(" + predicates[0].getPredicateNegativeNANDFormat() + "," + predicates[1].getPredicateNegativeNANDFormat() + "),%(" + predicates[0].getPredicateNANDFormat() + "," + predicates[1].getPredicateNANDFormat() + ")";
                         break;
                     case implication_sign:
-                        output_string += "%(" + predicates[0].getPredicateNegativeNANDFormat() + "," + predicates[1].getPredicateNegativeNANDFormat() + ")";
+                        output_string += "%(" + predicates[0].getPredicateNANDFormat() + "," + predicates[1].getPredicateNegativeNANDFormat() + ")";
                         break;
                     default:
                         output_string += "%(%(" + predicates[0].getPredicateNANDFormat() + "," + predicates[1].getPredicateNANDFormat() + "),%(" + predicates[0].getPredicateNANDFormat() + "," + predicates[1].getPredicateNANDFormat() + "))";
